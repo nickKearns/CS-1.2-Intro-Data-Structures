@@ -1,13 +1,13 @@
 import random, sys
 
 def rearrange_words(words):
-    temp_arr = []
+    temp_list = []
     indices_used = []
     for x in range(len(words)):
         temp_word = random.choice(words)
-        temp_arr.append(temp_word)
+        temp_list.append(temp_word)
         words.remove(temp_word)
-    return temp_arr
+    return temp_list
 
 
 
