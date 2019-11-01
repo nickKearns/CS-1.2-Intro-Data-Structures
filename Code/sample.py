@@ -1,23 +1,27 @@
 import random
 import sys
-from histogram import histogram
+from histogram import histogram, histogram_from_string
 
 
-def sample(source_text):
-    hist = histogram(source_text)
-    upper_bound = 0
-    for value in hist.values():
-        upper_bound += value
-    ran_num = random.randint(1, upper_bound)
-    total = 1
-    for key, value in hist.items():
-        total += value
-        if total >= ran_num:
-            return key
-
+def sample(histo):
+        upper_bound = sum(histo.values())
+        ran_num = random.randint(1, upper_bound)
+        # print(ran_num)
+        total = 0
+        for key, value in histo.items():
+                total += value
+                if total >= ran_num:
+                        return key
 
 
 
+def sample_test(source_text, num_iterations):   
+        histo = histogram(source_text)
+        outputs = []
+        for x in range(num_iterations):
+                outputs.append(sample(histo))
+                # print(outputs)
+        return histogram_from_string(' '.join(outputs))
 
 
 
@@ -25,7 +29,11 @@ def sample(source_text):
 if __name__ == '__main__':
     source_text = sys.argv[1]
     histo = histogram(source_text)
-    print(sample(source_text))
+    print(sample(histo))
+
+#     sample_data_string = sample_test(source_text, 50)
+    data_histo = sample_test(source_text, 100)
+    print(data_histo)
 
 
 

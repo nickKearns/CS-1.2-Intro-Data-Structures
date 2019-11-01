@@ -17,6 +17,19 @@ def histogram(source_text):
 
     return histogram
 
+
+def histogram_from_string(words_string):
+    histogram = {}
+    words_list = words_string.split()
+
+    for word in words_list:
+        if word in histogram:
+            histogram[word] += 1
+        else:
+            histogram[word] = 1
+    return histogram
+
+
 def unique_words(histogram):
     return len(histogram)
 
