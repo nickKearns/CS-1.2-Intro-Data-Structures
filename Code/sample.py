@@ -23,6 +23,15 @@ def sample_dict_hist(histo):
 
 
 
+
+def create_sentence(histo, length):
+        list_of_words = []
+        for x in range(length):
+                list_of_words.append(sample_dict_hist(histo))
+        return ' '.join(list_of_words)
+
+
+
 def sample_hist(histo):
         '''
                 function to randomly select a word from a histogram based on the number of times it occurs WORKS FOR LIST OF LISTS OR LIST OF TUPLES
