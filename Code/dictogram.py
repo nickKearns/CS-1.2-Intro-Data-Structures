@@ -1,7 +1,7 @@
 #!python
 
 from __future__ import division, print_function  # Python 2 and 3 compatibility
-
+import random
 
 class Dictogram(dict):
     """Dictogram is a histogram implemented as a subclass of the dict type."""
@@ -20,10 +20,35 @@ class Dictogram(dict):
     def add_count(self, word, count=1):
         """Increase frequency count of given word by given count amount."""
         # TODO: Increase word frequency by count
+        if word in self:
+            self[word] += count
+        else:
+            self[word] = count
+        self.types = len(self.keys())
+        self.tokens += count
 
     def frequency(self, word):
         """Return frequency count of given word, or 0 if word is not found."""
         # TODO: Retrieve word frequency count
+        if word in self:
+            return self[word]
+        else:
+            return 0
+
+    def sample(self):
+        """Return a word from this histogram, randomly sampled by weighting
+        each word's probability of being chosen by its observed frequency."""
+        # TODO: Randomly choose a word based on its frequency in this histogram
+        upper_bound = sum(self.values())
+        ran_num = random.randint(1,upper_bound)
+        total = 0
+        for key, value in self.items():
+                total += value
+                if total >= ran_num:
+                        return key
+
+        
+
 
 
 def print_histogram(word_list):
@@ -36,7 +61,43 @@ def print_histogram(word_list):
         freq = histogram.frequency(word)
         print('{!r} occurs {} times'.format(word, freq))
     print()
+    print_histogram_samples(histogram)
 
+
+def print_histogram_samples(histogram):
+    print('Histogram samples:')
+    # Sample the histogram 10,000 times and count frequency of results
+    samples_list = [histogram.sample() for _ in range(10000)]
+    samples_hist = Dictogram(samples_list)
+    print('samples: {}'.format(samples_hist))
+    print()
+    print('Sampled frequency and error from observed frequency:')
+    header = '| word type | observed freq | sampled freq  |  error  |'
+    divider = '-' * len(header)
+    print(divider)
+    print(header)
+    print(divider)
+    # Colors for error
+    green = '\033[32m'
+    yellow = '\033[33m'
+    red = '\033[31m'
+    reset = '\033[m'
+    # Check each word in original histogram
+    for word, count in histogram.items():
+        # Calculate word's observed frequency
+        observed_freq = count / histogram.tokens
+        # Calculate word's sampled frequency
+        samples = samples_hist.frequency(word)
+        sampled_freq = samples / samples_hist.tokens
+        # Calculate error between word's sampled and observed frequency
+        error = (sampled_freq - observed_freq) / observed_freq
+        color = green if abs(error) < 0.05 else yellow if abs(error) < 0.1 else red
+        print('| {!r:<9} '.format(word)
+            + '| {:>4} = {:>6.2%} '.format(count, observed_freq)
+            + '| {:>4} = {:>6.2%} '.format(samples, sampled_freq)
+            + '| {}{:>+7.2%}{} |'.format(color, error, reset))
+    print(divider)
+    print()
 
 def main():
     import sys

@@ -17,7 +17,7 @@ def histogram(source_text):
     
 
     for word in words_list:
-        if word in histogram:
+        if word.lower() in histogram:
             histogram[word] += 1
         else:
             histogram[word] = 1
