@@ -24,7 +24,7 @@ def build_markov_chain(words_list):
 def markov_sentence(chain, length):
     sampled_sentence = []
     sampled_sentence.append(choice(list(chain.keys())))
-    for i in range(length):
+    for i in range(0, length-1):
         sampled_sentence.append(chain[sampled_sentence[i]].sample())
     return ' '.join(sampled_sentence)
 

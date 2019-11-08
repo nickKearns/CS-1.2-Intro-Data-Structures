@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from cleanup import read_file
 import os
 from dictogram import Dictogram
@@ -10,14 +10,10 @@ app = Flask(__name__)
 def index():
 
     words_list = read_file('sherlock_holmes.txt')
-    num_words = 10
-    # histo = Dictogram(words_list)
-    # sampled_sentence = ""
+    num_words = int(request.args.get('num_words', 10))
     chain = build_markov_chain(words_list)
     sampled_sentence = markov_sentence(chain, num_words)
-    # for x in range(0, num_words):
-    #   sampled_sentence += histo.sample() + " "
-    return render_template('index.html', random_sentence = sampled_sentence)
+    return render_template('index.html', random_sentence = sampled_sentence, num_words=num_words)
 
 if __name__ == '__main__':
   app.run(debug=True)
