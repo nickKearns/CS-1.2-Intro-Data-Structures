@@ -3,7 +3,7 @@ from cleanup import read_file
 import os
 from dictogram import Dictogram
 from listogram import Listogram
-from markov import markov_sentence, build_markov_chain
+from markov import markov_sentence, build_markov_chain, Markov
 app = Flask(__name__)
 
 @app.route('/')
@@ -11,8 +11,8 @@ def index():
 
     words_list = read_file('sherlock_holmes.txt')
     num_words = int(request.args.get('num_words', 10))
-    chain = build_markov_chain(words_list)
-    sampled_sentence = markov_sentence(chain, num_words)
+    chain = Markov(words_list)
+    sampled_sentence = chain.create_sentence(num_words)
     return render_template('index.html', random_sentence = sampled_sentence, num_words=num_words)
 
 if __name__ == '__main__':
