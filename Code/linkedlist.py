@@ -60,15 +60,15 @@ class LinkedList(object):
         
         """
         # TODO: Loop through all nodes and count one for each
-        length = 1
+        # length = 1
         if self.is_empty():
             return 0
-        current_node = self.head
-        while current_node.next is not None:
-            length += 1
-            current_node = current_node.next
-        return length
-        # return self.num_nodes
+        # current_node = self.head
+        # while current_node.next is not None:
+        #     length += 1
+        #     current_node = current_node.next
+        # return length
+        return self.num_nodes
 
 
 
@@ -158,11 +158,12 @@ class LinkedList(object):
         # TODO: Otherwise raise error to tell user that delete has failed
         # Hint: raise ValueError('Item not found: {}'.format(item))
 
-
+        
         print(self.length())
         if self.length() == 0:
             raise ValueError('Item not found: {}'.format(item))
 
+        self.num_nodes -= 1
         node = self.head
         next_node = self.head.next
         found_item = False
@@ -170,7 +171,6 @@ class LinkedList(object):
         if self.head.data == item:
             self.head = self.head.next
             found_item = True
-            # self.num_nodes -= 1
             if self.length() == 0:
                 self.tail = None
         while next_node is not None:
@@ -178,7 +178,6 @@ class LinkedList(object):
             if next_node.data == item:
                 node.next = next_node.next
                 found_item = True
-                # self.num_nodes -=1
                 if next_node == self.tail:
                     self.tail = node
                 
