@@ -60,15 +60,15 @@ class LinkedList(object):
         
         """
         # TODO: Loop through all nodes and count one for each
-        # length = 1
-        # if self.is_empty():
-        #     return 0
-        # current_node = self.head
-        # while current_node.next is not None:
-        #     length += 1
-        #     current_node = current_node.next
-        # return length
-        return self.num_nodes
+        length = 1
+        if self.is_empty():
+            return 0
+        current_node = self.head
+        while current_node.next is not None:
+            length += 1
+            current_node = current_node.next
+        return length
+        # return self.num_nodes
 
 
 
@@ -132,6 +132,7 @@ class LinkedList(object):
             if quality(node.data) == True:
                 return  node.data
             node = node.next
+        return None
 
         
     def replace(self, item_to_delete, new_item):
@@ -169,7 +170,7 @@ class LinkedList(object):
         if self.head.data == item:
             self.head = self.head.next
             found_item = True
-            self.num_nodes -= 1
+            # self.num_nodes -= 1
             if self.length() == 0:
                 self.tail = None
         while next_node is not None:
@@ -177,7 +178,7 @@ class LinkedList(object):
             if next_node.data == item:
                 node.next = next_node.next
                 found_item = True
-                self.num_nodes -=1
+                # self.num_nodes -=1
                 if next_node == self.tail:
                     self.tail = node
                 
@@ -224,7 +225,7 @@ def test_linked_list():
     delete_implemented = True
     if delete_implemented:
         print('\nTesting delete:')
-        for item in ['B', 'B', 'C']:
+        for item in ['A', 'B', 'C']:
             print('delete({!r})'.format(item))
             ll.delete(item)
             print('list: {}'.format(ll))
@@ -232,6 +233,8 @@ def test_linked_list():
         print('head: {}'.format(ll.head))
         print('tail: {}'.format(ll.tail))
         print('length: {}'.format(ll.length()))
+
+
 
 
 if __name__ == '__main__':
