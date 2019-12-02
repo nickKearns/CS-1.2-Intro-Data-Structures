@@ -1,14 +1,29 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Tweet Generator</title>
+        <title>Seinfeld Generator</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://bootswatch.com/4/sandstone/bootstrap.min.css">
     </head>
     <body>
-        <h3>{{random_sentence}}</h3>
-        <form action='/'>
-            <button type="submit" name="new">New Sentence</button>
-            <input type="number" name='num_words' value="{{ num_words }}"/>
-        </form>
-       
+        <nav class="navbar navbar-light bg-light">
+            <span class="navbar-brand mb-0 h1">Nick Kearns Seinfeld sentence generator</span>
+        </nav>
+        <div class = "container-fluid">
+            <div class = "row justify-content-md-center">
+                <div class = "col-3">
+                    <div class="card"">
+                        <div class="card-body ">
+                            <h5 class="card-title">Seinfeld sentence generator</h5>
+                            <p class="card-text">{{random_sentence}}</p>
+                            <form action='/'>
+                                <button type="submit" name="new">New Sentence</button>
+                                <input type="number" name='num_words' value="{{ num_words }}"/>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
 </html>

@@ -59,7 +59,7 @@ class LinkedList(object):
         O(n) because there is a while loop where you are forced to iterate over the entire list of nodes
         
         """
-        # TODO: Loop through all nodes and count one for each
+        #TODO: Loop through all nodes and count one for each
         # length = 1
         if self.is_empty():
             return 0
@@ -69,6 +69,8 @@ class LinkedList(object):
         #     current_node = current_node.next
         # return length
         return self.num_nodes
+        # return len(self.items()) this works too
+        
 
 
 
@@ -163,7 +165,6 @@ class LinkedList(object):
         if self.length() == 0:
             raise ValueError('Item not found: {}'.format(item))
 
-        self.num_nodes -= 1
         node = self.head
         next_node = self.head.next
         found_item = False
@@ -181,20 +182,14 @@ class LinkedList(object):
                 if next_node == self.tail:
                     self.tail = node
                 
-                
-
             node = next_node
             next_node = next_node.next
 
             print("head: {}".format(self.head))
             print("tail: {}".format(self.tail))
-            
-
-
-
-
-
-        if found_item == False:
+        if found_item:
+            self.num_nodes -= 1
+        else:
             raise ValueError('Item not found: {}'.format(item))
 
             
