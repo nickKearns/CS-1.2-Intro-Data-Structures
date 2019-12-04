@@ -3,7 +3,7 @@ from cleanup import read_file
 import os
 from dictogram import Dictogram
 from listogram import Listogram
-from markov import markov_sentence, build_markov_chain, Markov
+from markov import Markov
 app = Flask(__name__)
 
 @app.route('/')
