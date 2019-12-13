@@ -1,10 +1,15 @@
 from flask import Flask, render_template, request
 from cleanup import read_file
 import os
+import json
 from dictogram import Dictogram
 from listogram import Listogram
 from markov import Markov
 app = Flask(__name__)
+
+
+1 
+
 
 @app.route('/')
 def index():

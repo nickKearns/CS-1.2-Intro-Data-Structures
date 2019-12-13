@@ -142,6 +142,7 @@ class LinkedList(object):
         while node is not None:
             if node.data == item_to_delete:
                 node.data = new_item
+                break
             node = node.next
 
 
@@ -181,6 +182,9 @@ class LinkedList(object):
                 found_item = True
                 if next_node == self.tail:
                     self.tail = node
+                    break
+                break
+
                 
             node = next_node
             next_node = next_node.next
